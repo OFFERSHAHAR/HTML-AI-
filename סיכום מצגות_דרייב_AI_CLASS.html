@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>AI Learning OS | Liquid Glass Academy</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <style>
+    :root{
+      --bg:#f7fbff; --ink:#17324d; --muted:#61778e; --glass:rgba(255,255,255,.54); --stroke:rgba(255,255,255,.74);
+      --a:#bfe9ff; --b:#ffd6ea; --c:#d8f8de; --d:#eee4ff; --e:#fff1bf; --shadow:0 24px 70px rgba(73,91,126,.18);
+      --r:30px; --blur:28px; --mx:50%; --my:50%; --tiltX:0deg; --tiltY:0deg;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:Arial,Assistant,Heebo,sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;z-index:-3;background:
+      radial-gradient(circle at var(--mx) var(--my),rgba(255,255,255,.95),transparent 17%),
+      radial-gradient(circle at 12% 10%,var(--a),transparent 25%),radial-gradient(circle at 87% 14%,var(--b),transparent 28%),
+      radial-gradient(circle at 20% 88%,var(--c),transparent 28%),radial-gradient(circle at 75% 76%,var(--d),transparent 28%),linear-gradient(135deg,#fbfdff,#f4f8ff 48%,#fff7fb)}
+    body:after{content:"";position:fixed;inset:0;z-index:-2;opacity:.28;background-image:linear-gradient(rgba(20,40,70,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(20,40,70,.05) 1px,transparent 1px);background-size:42px 42px;mask-image:radial-gradient(circle at center,#000,transparent 80%)}
+    a{color:inherit;text-decoration:none}.app{min-height:100vh}.orb{position:fixed;border-radius:999px;filter:blur(8px);opacity:.58;z-index:-1;transform:translate3d(calc(var(--px)*1px),calc(var(--py)*1px),0)}
+    .orb.one{width:260px;height:260px;background:#bfe9ff;left:4%;top:12%}.orb.two{width:330px;height:330px;background:#ffd6ea;right:2%;top:38%}.orb.three{width:240px;height:240px;background:#d8f8de;left:20%;bottom:4%}
+    header{position:sticky;top:0;z-index:50;padding:14px 18px;backdrop-filter:blur(24px);background:rgba(255,255,255,.34);border-bottom:1px solid rgba(255,255,255,.7)}
+    .nav{max-width:1220px;margin:auto;display:flex;align-items:center;gap:12px;justify-content:space-between}.brand{display:flex;gap:10px;align-items:center;font-weight:900}.logo{width:45px;height:45px;border-radius:16px;background:linear-gradient(135deg,#fff,#cfefff,#ffe4f1);box-shadow:inset 0 0 0 1px #fff,0 12px 30px rgba(70,100,140,.16);display:grid;place-items:center}.links{display:flex;gap:8px;flex-wrap:wrap}.links a,.pill{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.75);backdrop-filter:blur(16px);font-weight:700;color:#31506d}.progress{position:absolute;inset:auto 0 0 0;height:3px;background:linear-gradient(90deg,#9fe4ff,#ffb8dc,#bff2c8);transform-origin:right;transform:scaleX(var(--scroll,0))}
+    main{max-width:1220px;margin:auto;padding:30px 18px 100px}.hero{min-height:78vh;display:grid;grid-template-columns:1.08fr .92fr;gap:28px;align-items:center}.glass{background:var(--glass);border:1px solid var(--stroke);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(var(--blur)) saturate(160%);position:relative;overflow:hidden}.glass:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx) var(--my),rgba(255,255,255,.7),transparent 22%);opacity:.7;pointer-events:none}.hero-card{padding:44px;transform:perspective(950px) rotateX(var(--tiltX)) rotateY(var(--tiltY));transition:.16s ease-out}.kicker{display:inline-flex;gap:8px;align-items:center;margin-bottom:18px}.kicker span{background:linear-gradient(135deg,#fff,#eaf8ff);border:1px solid #fff;border-radius:999px;padding:9px 12px;color:#4e6b85;font-weight:800}.hyper{font-size:clamp(44px,8vw,104px);line-height:.92;margin:0 0 22px;font-weight:1000;letter-spacing:-3px}.hyper .word{display:inline-block;transition:.25s cubic-bezier(.2,1,.2,1);text-shadow:0 16px 38px rgba(34,71,105,.12)}.hyper .word:hover{transform:translateY(-10px) scale(1.04);filter:drop-shadow(0 18px 18px rgba(120,150,180,.18))}.grad{background:linear-gradient(100deg,#153753,#58bde8,#e782ba,#8acf9b);-webkit-background-clip:text;background-clip:text;color:transparent}.lead{font-size:clamp(18px,2.2vw,26px);line-height:1.45;color:#405b75;margin:0 0 26px}.cta{display:flex;gap:12px;flex-wrap:wrap}.btn{border:0;border-radius:20px;padding:15px 20px;font-weight:900;color:#14344c;background:linear-gradient(135deg,#fff,#dff5ff);box-shadow:0 14px 34px rgba(89,130,170,.18);cursor:pointer}.btn.alt{background:rgba(255,255,255,.42);border:1px solid #fff}.visual{height:620px;padding:20px;display:grid;place-items:center}.phone{width:min(370px,92%);height:560px;border-radius:48px;padding:14px;background:rgba(255,255,255,.46);border:1px solid #fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),0 30px 80px rgba(66,82,120,.24);transform:translateY(calc(var(--par)*-34px))}.screen{height:100%;border-radius:36px;background:linear-gradient(160deg,rgba(255,255,255,.8),rgba(226,244,255,.48));padding:20px;overflow:hidden}.chip{height:90px;border-radius:26px;background:rgba(255,255,255,.62);border:1px solid #fff;margin:12px 0;padding:16px;box-shadow:0 12px 35px rgba(80,100,140,.1);animation:float 5s ease-in-out infinite}.chip:nth-child(2){animation-delay:.8s}.chip:nth-child(3){animation-delay:1.6s}.chip:nth-child(4){animation-delay:2.4s}@keyframes float{50%{transform:translateY(-12px)}}
+    section{margin:34px 0}.section-title{display:flex;justify-content:space-between;gap:20px;align-items:end;margin:0 0 18px}.section-title h2{font-size:clamp(30px,4vw,54px);margin:0;letter-spacing:-1px}.section-title p{max-width:520px;color:var(--muted);font-size:18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{padding:24px;min-height:210px;transition:.25s ease;transform:translateY(0)}.card:hover{transform:translateY(-8px) scale(1.015)}.num{font-size:14px;font-weight:900;color:#5b7894}.card h3{font-size:24px;margin:12px 0 10px}.card p,.card li{color:#536a80;line-height:1.65}.tag{display:inline-block;margin:4px 4px 0 0;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.55);border:1px solid #fff;font-size:13px;font-weight:800;color:#55708a}.wide{grid-column:span 2}.lab{display:grid;grid-template-columns:1fr 1fr;gap:16px}.exercise{padding:24px}.exercise h3{font-size:26px;margin:0 0 10px}.steps{counter-reset:s}.steps li{list-style:none;margin:10px 0;padding:14px;border-radius:18px;background:rgba(255,255,255,.45);border:1px solid #fff}.steps li:before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#fff;margin-left:8px;font-weight:900}.timeline{display:grid;gap:12px}.row{display:grid;grid-template-columns:140px 1fr;gap:14px;align-items:stretch}.time{padding:18px;border-radius:22px;text-align:center;font-weight:1000;background:rgba(255,255,255,.54);border:1px solid #fff}.module{padding:18px;border-radius:22px;background:rgba(255,255,255,.45);border:1px solid #fff}.module b{display:block;font-size:20px;margin-bottom:4px}.studio{display:grid;grid-template-columns:320px 1fr;gap:16px}.side{padding:20px;position:sticky;top:90px;height:max-content}.side button{width:100%;margin:7px 0;text-align:right}.panel{padding:28px;min-height:430px}.code{direction:ltr;text-align:left;white-space:pre-wrap;background:rgba(20,35,55,.85);color:#ddf8ff;border-radius:24px;padding:20px;overflow:auto;font-family:Consolas,monospace;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}.footer{padding:36px;text-align:center;color:#59718a}.spark{position:fixed;width:12px;height:12px;border-radius:50%;pointer-events:none;background:rgba(255,255,255,.9);box-shadow:0 0 30px #99dcff;animation:pop .7s forwards;z-index:999}@keyframes pop{to{transform:translateY(-30px) scale(0);opacity:0}}
+    @media(max-width:920px){.hero,.lab,.studio{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.visual{height:auto}.phone{height:520px}.links{display:none}.hero-card{padding:28px}.row{grid-template-columns:1fr}.side{position:relative;top:0}.hyper{letter-spacing:-1px}}
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    const h = React.createElement;
+    const modules=[
+      ['01','Vibe Engineering','לעצור לפני הקוד: בעיה עסקית, משתמשים, Scope, Constraints, Guardrails ו-PRD.', ['Business Goal','Scope','PRD','Before Code']],
+      ['02','PRD ו-Product Thinking','Background, Problem, Personas, Use Cases, דרישות, מגבלות, Success Metrics.', ['Lean PRD','User Stories','KPIs']],
+      ['03','UI/UX + UXUX','זרימות, היררכיה, מיקרו-אינטראקציות, מובייל ראשון, נגישות, מצב ריק ושגיאות.', ['Flows','Screens','Components']],
+      ['04','Replit / Cursor / Claude','עבודה עם Agent, ניהול Context, Checkpoints, Refactor בטוח, Debugging עם AI.', ['CONTEXT.md','Versioning','Review']],
+      ['05','n8n + אוטומציה','Triggers, Actions, Logic, חיבור CRM/Sheets/Slack/Email ו-AI בתהליך.', ['Workflow','Webhook','Orchestration']],
+      ['06','Agents & Multi-Agent','מתי סוכן אחד מספיק, מתי צריך Orchestrator, Reviewer, Aggregator וכלים.', ['Agent','Tools','Memory']],
+      ['07','AIOps','ניטור, Drift, מדדים, CI/CD למודלים, תפעול, אחריות ותגובה לתקלות.', ['Monitoring','Drift','Ops']],
+      ['08','Security Mindset','Prompt Injection, Secrets, הרשאות מינימליות, Zero Trust, Audit ו-Incident Response.', ['Zero Trust','Secrets','Audit']],
+      ['09','AI Code at Scale','Human-in-the-Loop, בדיקות, אחריות, Design Decisions ו-Security Decisions.', ['HITL','Tests','Scale']]
+    ];
+    const exercises=[
+      ['תרגיל 1: PRD חד כמו סכין לייזר','בחר מוצר AI. כתוב בעיה עסקית, משתמשים, 5 דרישות, 3 KPIs ו-2 Guardrails קריטיים.'],
+      ['תרגיל 2: UXUX Flow','צייר מסך כניסה, דשבורד, מצב טעינה, מצב שגיאה ומצב הצלחה. הוסף Microcopy לכל מצב.'],
+      ['תרגיל 3: Replit Context Reset','צור CONTEXT.md עם מטרת פרויקט, Stack, Data Model, מה עובד, מה אסור לשנות.'],
+      ['תרגיל 4: n8n Workflow','בנה זרימה: טופס ליד → סיווג AI → כתיבה ל-Sheet → הודעת Slack → אישור אנושי.'],
+      ['תרגיל 5: Multi-Agent Review','תכנן Orchestrator, Writer, Reviewer, Security Agent ו-Aggregator למערכת תוכן ארגונית.'],
+      ['תרגיל 6: AIOps Plan','הגדר 6 מדדים למערכת AI בייצור: דיוק, זמן תגובה, שגיאות, Drift, עלות, שביעות רצון.'],
+      ['תרגיל 7: Security Tabletop','כתוב תרחיש Prompt Injection. הגדר איך מזהים, חוסמים, מתעדים ומחזירים מערכת למצב בטוח.']
+    ];
+    const prompts={
+      prd:`You are a senior product manager and solution architect.\nHelp me write a clear Lean PRD.\nAsk clarifying questions first.\nStructure: Background, Problem Statement, Users, Use Cases, Functional Requirements, Non-Functional Requirements, Constraints, Success Metrics, Risks, Open Questions.`,
+      ux:`You are a senior UX designer.\nBased on this PRD, define the main user flows, screens, components, empty states, error states, success states and mobile-first behavior.\nFocus on clarity, usability and premium iOS liquid-glass interaction.`,
+      replit:`Read CONTEXT.md and the following files: [list].\nSummarize what you understand before making changes.\nDo not change architecture without approval.\nWork in small steps, create checkpoints, and ask for confirmation before refactor.`,
+      guard:`Define AI Guardrails for this system:\n1. Business boundaries\n2. Input validation\n3. Output filtering\n4. Security and privacy\n5. Human approval points\n6. Monitoring and audit logs\nReturn as a checklist.`
+    };
+    function App(){
+      const [tab,setTab]=React.useState('prd');
+      React.useEffect(function(){
+        const move=function(e){
+          const x=e.clientX/window.innerWidth*100, y=e.clientY/window.innerHeight*100;
+          document.documentElement.style.setProperty('--mx',x+'%');
+          document.documentElement.style.setProperty('--my',y+'%');
+          document.documentElement.style.setProperty('--tiltY',((x-50)/-28)+'deg');
+          document.documentElement.style.setProperty('--tiltX',((y-50)/28)+'deg');
+          if(Math.random()>.86){
+            const s=document.createElement('i'); s.className='spark'; s.style.left=e.clientX+'px'; s.style.top=e.clientY+'px';
+            document.body.appendChild(s); setTimeout(function(){s.remove()},720);
+          }
+        };
+        const scroll=function(){
+          const max=Math.max(1, document.body.scrollHeight-window.innerHeight);
+          document.documentElement.style.setProperty('--scroll',window.scrollY/max);
+          document.documentElement.style.setProperty('--par',window.scrollY/500);
+        };
+        window.addEventListener('pointermove',move); window.addEventListener('scroll',scroll); scroll();
+        return function(){ window.removeEventListener('pointermove',move); window.removeEventListener('scroll',scroll); };
+      },[]);
+      return h('div',{className:'app'},
+        h('i',{className:'orb one'}),h('i',{className:'orb two'}),h('i',{className:'orb three'}),
+        h('header',null,
+          h('div',{className:'nav'},
+            h('a',{className:'brand',href:'#top'},h('span',{className:'logo'},'✦'),h('span',null,'AI Learning OS')),
+            h('nav',{className:'links'},h('a',{href:'#modules'},'מודולים'),h('a',{href:'#lab'},'תרגילים'),h('a',{href:'#studio'},'Prompt Studio'),h('a',{href:'#plan'},'לו״ז')),
+            h('span',{className:'pill'},'iOS 26 Liquid Glass')
+          ),h('div',{className:'progress'})
+        ),
+        h('main',{id:'top'},
+          h('section',{className:'hero'},
+            h('div',{className:'glass hero-card'},
+              h('div',{className:'kicker'},h('span',null,'Reactive Page'),h('span',null,'Parallax Hyper Text'),h('span',null,'Pastel UI')),
+              h('h1',{className:'hyper'},h('span',{className:'word grad'},'קורס'),' ',h('span',{className:'word'},'AI'),h('br'),h('span',{className:'word'},'מהכל'),' ',h('span',{className:'word grad'},'כולל הכל')),
+              h('p',{className:'lead'},'אתר לימודים מלא למיישמי AI בארגונים: Vibe Engineering, PRD, UI/UX, Replit, n8n, Agents, AIOps, Security, Guardrails וקוד בסקייל. הכל בנוי כעמוד React אינטראקטיבי עם Hover, Parallax, Glass, תרגילים ופרומפטים מוכנים.'),
+              h('div',{className:'cta'},h('a',{className:'btn',href:'#modules'},'פתח סילבוס'),h('a',{className:'btn alt',href:'#lab'},'קפוץ לתרגילים'))
+            ),
+            h('div',{className:'glass visual'},h('div',{className:'phone'},h('div',{className:'screen'},
+              ['01 Vibe Engineering|עוצרים, מגדירים מסגרת ואז נותנים ל-AI לרוץ.','02 Guardrails|חוקים שלא שוברים לפני שורת קוד.','03 Human-in-the-Loop|AI מייצר, אדם בודק, מערכת מאמתת.','04 AIOps|אחרי Launch מתחיל המשחק האמיתי.'].map(function(x){const a=x.split('|'); return h('div',{className:'chip',key:a[0]},h('b',null,a[0]),h('br'),a[1]);})
+            )))
+          ),
+          SectionTitle('modules','סילבוס מלא','9 יחידות עומק, כל אחת עם מטרת למידה, מילים קריטיות ותרגול מעשי.'),
+          h('div',{className:'grid'},modules.map(function(m,i){return h('article',{className:'glass card '+(i===0||i===5?'wide':''),key:m[0]},h('span',{className:'num'},m[0]),h('h3',null,m[1]),h('p',null,m[2]),m[3].map(function(t){return h('span',{className:'tag',key:t},t)}));})),
+          SectionTitle('lab','תרגילים מעשיים','כל תרגיל בנוי לביצוע בכיתה או לבד, עם תוצר ברור שאפשר להגיש.'),
+          h('div',{className:'lab'},exercises.map(function(e){return h('div',{className:'glass exercise',key:e[0]},h('h3',null,e[0]),h('p',null,e[1]),h('ol',{className:'steps'},h('li',null,'הגדר תוצר סופי'),h('li',null,'עבוד ב-3 איטרציות בלבד'),h('li',null,'בצע בדיקה אנושית'),h('li',null,'כתוב מסקנות ושיפור הבא')));})),
+          SectionTitle('studio','Prompt Studio','פרומפטים מוכנים לעבודה עם Claude / ChatGPT / Replit / Cursor. קליק ומקבלים נוסח עבודה.'),
+          h('div',{className:'studio'},
+            h('aside',{className:'glass side'},['prd','ux','replit','guard'].map(function(k){return h('button',{className:'btn',key:k,onClick:function(){setTab(k)}},k==='prd'?'PRD':k==='ux'?'UI/UX':k==='replit'?'Replit Context':'Guardrails')})),
+            h('div',{className:'glass panel'},h('h3',null,tab.toUpperCase()),h('pre',{className:'code'},prompts[tab]))
+          ),
+          SectionTitle('plan','לו״ז לימוד מומלץ','מסלול של 6 שעות או שני מפגשים, מהבעיה העסקית עד אתר/אוטומציה עם בקרות.'),
+          h('div',{className:'glass exercise'},h('div',{className:'timeline'},[['00:00','פתיחה: למה AI בלי מסגרת מייצר בלגן יפה'],['00:30','Vibe Engineering + PRD'],['01:30','UI/UX UXUX ומובייל ראשון'],['02:15','Replit / Cursor / Context Management'],['03:00','n8n ו-AI Workflow'],['04:00','Agents / Multi-Agent'],['04:45','Security + Guardrails + AIOps'],['05:30','פרויקט מסכם והצגה']].map(function(r){return h('div',{className:'row',key:r[0]},h('div',{className:'time'},r[0]),h('div',{className:'module'},h('b',null,r[1]),h('span',null,'תוצר: מסמך, מסך, Workflow או Checklist.')));}))),
+          h('footer',{className:'footer'},'נבנה כקובץ HTML אחד: React UMD + CSS + Liquid Glass + Pastel Motion + Hover Reactive. בלי import, בלי Babel, עובד ישירות בדפדפן.')
+        )
+      );
+    }
+    function SectionTitle(id,title,text){return h('section',{id:id},h('div',{className:'section-title'},h('h2',null,title),h('p',null,text)));}
+    ReactDOM.createRoot(document.getElementById('root')).render(h(App));
+  </script>
+</body>
+</html>
